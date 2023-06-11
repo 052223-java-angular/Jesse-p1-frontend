@@ -1,25 +1,26 @@
 
 <div class =" flex flex-col items-center">
-  <form class="flex flex-col items-center gap-10 my-40 shadow-xl p-20 rounded-md">
+  <form [formGroup]="registerForm"] (ngSubmit)="submitForm()" class="flex flex-col items-center gap-10 my-40 shadow-xl p-20 rounded-md">
     <h1 class="font-bold text-4xl "> Register...</h1>
 
       <label class="flex flex-col">
           Username:
-          <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="Username"/>
+          <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="Username" formControlName="username" />
       </label>
 
       <label class="flex flex-col">
           Password:
-          <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="Password"/>
+          <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="password" placeholder="Password" formControlName="password"/>
       </label>
 
       <label class="flex flex-col">
           Confirm Password:
-          <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="Confirm Password"/>
+          <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="password" placeholder="Confirm Password" formControlName="confirmPassword"/>
       </label>
 
       <button type="submit" class="bg-red-600 px-5 py-2 text-white rounded-md shadow-xl transition hover:ease-out hover:scale-110 duration-300">Submit</button>
 
       <a class="text-blue-500 underline-offset-4" routerLink="/login">Already have an account?</a>
+
   </form>
 </div>

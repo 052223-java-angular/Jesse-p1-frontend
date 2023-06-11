@@ -26,3 +26,10 @@ replay_pid*
 *.settings/
 *.classpath
 *.project
+
+.DS_Store
+Thumbs.db
+
+.idea
+
+*target/*
