@@ -10,6 +10,9 @@ import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ToastrModule} from "ngx-toastr";
+import { MainmenuComponent } from './pages/mainmenu/mainmenu.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +21,20 @@ import {HttpClientModule} from "@angular/common/http";
     HomeComponent,
     NotFoundComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    MainmenuComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 4500,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

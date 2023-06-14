@@ -1,1 +1,37 @@
-<p>login works!</p>
+
+<div class =" flex flex-col items-center">
+  <form [formGroup]="loginForm" (ngSubmit)="submitForm()" class="flex flex-col items-center gap-10 my-40 shadow-xl p-20 rounded-md">
+    <h1 class="font-bold text-4xl "> Login...</h1>
+
+    <label class="flex flex-col">
+      Username:
+      <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="Username" formControlName="username" />
+    </label>
+
+    <!--Show when username is invalid-->
+    <ng-container *ngIf="loginForm.controls['username']?.errors">
+      <small class="text-red-600" *ngIf="loginForm.controls['username']?.touched">
+        Username needs to be 8-20 characters
+      </small>
+    </ng-container>
+
+    <label class="flex flex-col">
+      Password:
+      <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="password" placeholder="Password" formControlName="password"/>
+    </label>
+
+    <!--Show when password is invalid-->
+    <ng-container *ngIf="loginForm.controls['password']?.errors">
+      <small class="text-red-600" *ngIf="loginForm.controls['password']?.touched">
+        Password can not be empty
+      </small>
+    </ng-container>
+
+
+
+    <button type="submit" class="bg-yellow-600 px-5 py-2 text-white rounded-md shadow-xl transition hover:ease-out hover:scale-110 duration-300">Submit</button>
+
+    <a class="text-blue-500 underline-offset-4" routerLink="/register">Need to make an account?</a>
+
+  </form>
+</div>
