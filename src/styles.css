@@ -2,3 +2,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body{
+  @apply font-serif;
+}
+.font-serif {
+  font-family:  Georgia, Cambria, "Times New Roman", Times, serif;
+}
+.toast-success{
+
+}

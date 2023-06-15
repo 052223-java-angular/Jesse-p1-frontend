@@ -8,7 +8,8 @@ import {LoginPayload} from "../models/login-payload";
 @Injectable({
   providedIn: 'root'
 })
-export class AuthServiceService {
+export class AuthServiceService
+{
   baseUrl ='http://localhost:8080/music/api';
   constructor( private http: HttpClient) { }
 
@@ -16,6 +17,7 @@ export class AuthServiceService {
   register(payload: RegisterPayload): Observable<Auth>{
     return this.http.post <Auth>(`${this.baseUrl}/auth/register`,payload)
   }
+
   login(payload: LoginPayload): Observable<Auth>{
     return this.http.post <Auth>(`${this.baseUrl}/auth/login`,payload);
   }

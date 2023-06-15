@@ -4,6 +4,7 @@ import {AuthServiceService} from "../../services/auth-service.service";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {LoginPayload} from "src/app/models/login-payload";
+import {SpotifyapicallsService} from "../../services/spotifyapicalls.service";
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit{
   //Form builder -
   constructor(private fb: FormBuilder,
               private authService: AuthServiceService,
+              private spotifyAPI: SpotifyapicallsService,
               private router: Router,
               private toastr: ToastrService) {}
   ngOnInit(): void {
@@ -50,6 +52,8 @@ export class LoginComponent implements OnInit{
     this.authService.login(payload).subscribe({
       next: value => {
         this.toastr.success('Login successful...');
+        this.spotifyAPI.spotifyAuth();
+        this.spotifyAPI.search();
         this.router.navigate(['/mainmenu']);
 
       },
@@ -59,4 +63,6 @@ export class LoginComponent implements OnInit{
       }
     });
   }
+
+
 }

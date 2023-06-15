@@ -16,7 +16,10 @@ export class RegisterComponent implements OnInit{
 
   //Inject the authService. You don't have to data bind to the fields it is done automatically
   //Form builder -
-  constructor(private fb: FormBuilder, private authService: AuthServiceService, private router: Router, private toastr: ToastrService) {}
+  constructor(private fb: FormBuilder,
+              private authService: AuthServiceService,
+              private router: Router,
+              private toastr: ToastrService) {}
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       username:['', Validators.required],

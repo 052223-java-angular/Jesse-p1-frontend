@@ -13,6 +13,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import { MainmenuComponent } from './pages/mainmenu/mainmenu.component';
+import { SearchbarComponent } from './components/searchbar/searchbar.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MainmenuComponent } from './pages/mainmenu/mainmenu.component';
     NotFoundComponent,
     RegisterComponent,
     LoginComponent,
-    MainmenuComponent
+    MainmenuComponent,
+    SearchbarComponent
   ],
   imports: [
     BrowserModule,
