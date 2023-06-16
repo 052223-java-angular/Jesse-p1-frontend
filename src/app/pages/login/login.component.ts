@@ -52,8 +52,9 @@ export class LoginComponent implements OnInit{
     this.authService.login(payload).subscribe({
       next: value => {
         this.toastr.success('Login successful...');
+        console.log(value);
+        localStorage.setItem('token', value.token.toString())
         this.spotifyAPI.spotifyAuth();
-        this.spotifyAPI.search();
         this.router.navigate(['/mainmenu']);
 
       },

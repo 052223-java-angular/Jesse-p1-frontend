@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {FormGroup} from "@angular/forms";
+import {Track} from "../models/track";
+import {Observable} from "rxjs";
+import {Auth} from "../models/auth";
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +14,7 @@ export class SpotifyapicallsService {
 
 
   private accessToken: string = '';
+  public trackItems: Track[] = [];
 
 
   constructor(private http: HttpClient) {
@@ -27,42 +33,40 @@ export class SpotifyapicallsService {
 
     this.http.post<any>('https://accounts.spotify.com/api/token', authParameters.toString(), { headers })
       .toPromise()
-      .then((data) => {
-        this.accessToken = data.access_token;
-        console.log(data);
-        console.log("Access token: " + this.accessToken);
+        .then((data) => {
+          this.accessToken = data.access_token;
+          console.log(data);
+          console.log("Access token: " + this.accessToken);
       })
-      .catch((error) => {
+        .catch((error) => {
         console.error(error);
       });
   }
 
 
-  async search() {
-    const searchInput = 'Taylor Swift'; // Replace with your actual search query
+  searchMusic(searchInput: FormGroup):Observable<any>
+  {
+    let searchItem = searchInput.toString();
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.accessToken
     });
 
-    const params = {
-      q: searchInput,
-      type: 'artist',
+    let params = {
+      q: searchItem,
+      type: 'track',
       market: 'ES',
-      limit: 1
+      limit: 20
     };
 
-    this.http.get<any>(`${this.baseUrl}/v1/search`, {headers, params}).toPromise()
-      .then((data) => {
-        console.log(data);
-        console.log("the artist id: " + data.artists.items[0].id)
-
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+   return  this.http.get<any>(`${this.baseUrl}/v1/search`, {headers, params})
   }
+
+  //addToPlaylist(artistId: number) {
+    //return this.http.post(`${this.apiUrl}/add`, { artistId });
+  //}
+
 }
 
 

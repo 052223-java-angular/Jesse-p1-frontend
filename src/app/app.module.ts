@@ -8,12 +8,12 @@ import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import { MainmenuComponent } from './pages/mainmenu/mainmenu.component';
-import { SearchbarComponent } from './components/searchbar/searchbar.component';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { SearchbarComponent } from './components/searchbar/searchbar.component';
     RegisterComponent,
     LoginComponent,
     MainmenuComponent,
-    SearchbarComponent
+
   ],
   imports: [
     BrowserModule,
@@ -37,6 +37,7 @@ import { SearchbarComponent } from './components/searchbar/searchbar.component';
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
