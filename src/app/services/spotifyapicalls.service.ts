@@ -20,6 +20,10 @@ export class SpotifyapicallsService {
   constructor(private http: HttpClient) {
   }
 
+
+  /**
+   * Grabs spotify token in order to make api calls
+   */
   spotifyAuth(): void {
     const clientId = '254184c7d88442afa6faa5ef8bba5179';
     const secret = '63dccd86ff4f4aa18d9c479ade29cc77';
@@ -57,7 +61,7 @@ export class SpotifyapicallsService {
       q: searchItem,
       type: 'track',
       market: 'ES',
-      limit: 20
+      limit: 10
     };
 
    return  this.http.get<any>(`${this.baseUrl}/v1/search`, {headers, params})

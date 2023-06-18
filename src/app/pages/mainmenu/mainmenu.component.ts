@@ -19,32 +19,46 @@ export class MainmenuComponent implements OnInit{
       search: ['', Validators.required]
     });
   }
+
+  /**
+   * Based on the users search this method will take the name entered and use the spotify api
+   * to retrieve 10 search results.
+   */
   searchMusic() {
+   // console.log(localStorage.getItem('token'));
     console.log(this.searchInput.value.search);
     this.trackItems = [];
     this.spotifyAPI.searchMusic(this.searchInput.value.search)
       .subscribe(
         (data: any) => {
-          let tracks: any[] = [];
 
-          data.tracks.items.forEach((item: any) => {
+          let trackItems: any[] = [];
+
+          //iterate through results from api call
+          data.tracks.items.forEach((item: any) =>
+          {
+            //Data taken from spotify call
             let albumName = item.album.name;
             let artistName = item.artists[0].name;
             let trackName = item.name;
             let duration = item.duration_ms;
+            //Look into grabbing a picture im pretty sure is can
 
-            let track: Track = {
+            //Create track item
+            let track: Track =
+              {
               albumName,
               artistName,
               trackName,
               duration
             };
 
-            tracks.push(track);
-            this.trackItems.push(track);
+            trackItems.push(track);//instantiate tracks array
+
+            this.trackItems.push(track);// Add to the array in order to display to the user
           });
 
-          console.log("Tracks:", tracks);
+          console.log("Tracks:", trackItems);
         },
         (error: any) => {
           console.error(error);
