@@ -1,0 +1,35 @@
+<div class="container">
+  <div id="one">
+    <header>
+      <h1>Your playlists</h1>
+    </header>
+    playlist1<br>
+    song1<br>
+    song2<br>
+    dong3<br>
+  </div>
+
+
+
+<div id="two">
+  <form [formGroup]="playlistForm" (ngSubmit)="createPlaylist()">
+    <h1>Create Playlist</h1>
+    <div class="create-playlist">
+      <div>
+      <label>
+        Title:
+        <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="Title" formControlName="title" />
+      </label>
+      </div>
+      <div>
+      <label>
+        Description:
+        <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="Description" formControlName="description" />
+      </label>
+        </div>
+      <button type="submit" class="bg-blue-600 px-5 py-2 text-white rounded-md shadow-xl transition hover:ease-out hover:scale-110 duration-300">Submit</button>
+
+    </div>
+  </form>
+</div>
+</div>
