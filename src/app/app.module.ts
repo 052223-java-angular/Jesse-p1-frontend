@@ -13,6 +13,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import { MainmenuComponent } from './pages/mainmenu/mainmenu.component';
+import { PlaylistComponent } from './pages/playlist/playlist.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { MainmenuComponent } from './pages/mainmenu/mainmenu.component';
     RegisterComponent,
     LoginComponent,
     MainmenuComponent,
+    PlaylistComponent,
 
   ],
   imports: [
