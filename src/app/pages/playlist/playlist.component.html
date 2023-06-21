@@ -1,31 +1,53 @@
 <div class="container">
   <div id="one">
-    <header>
-      <h1>Your playlists</h1>
+    <header class=" py-4 px-6">
+      <h1 class="text-2xl font-bold">Your Playlists</h1>
     </header>
-    playlist1<br>
-    song1<br>
-    song2<br>
-    dong3<br>
+    <ul>
+      <li *ngFor="let playlist of playlists" class="border-b py-4">
+        <div class="mb-2">
+          <strong class="font-bold">ID:</strong> {{ playlist.id }}
+        </div>
+        <div class="mb-2">
+          <strong class="font-bold">Title:</strong> {{ playlist.title }}
+        </div>
+        <div class="mb-4">
+          <strong class="font-bold">Description:</strong> {{ playlist.description }}
+        </div>
+        <button class="px-5 py-2 text-white bg-blue-600 shadow-xl"
+          (click)=selectPlaylist(playlist.id)>
+          Select
+        </button>
+<!--        <strong>Songs:</strong>-->
+<!--        <ul>-->
+<!--          <li *ngFor="let song of playlist.songs">-->
+<!--            <strong> ID:</strong> {{song.id}}<br>-->
+<!--            <strong>Title:</strong>{{song.title}}<br>-->
+<!--            <strong>Duration:</strong>{{song.duration}}<br>-->
+<!--        </ul>-->
+      </li>
+    </ul>
   </div>
-
-
 
 <div id="two">
   <form [formGroup]="playlistForm" (ngSubmit)="createPlaylist()">
-    <h1>Create Playlist</h1>
+    <h1 class="text-2xl font-bold">Create Playlist</h1>
     <div class="create-playlist">
-      <div>
+      <div >
       <label>
         Title:
         <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="Title" formControlName="title" />
       </label>
+        <small *ngIf="playlistForm.controls['title']?.touched">
+          Can't be blank
+        </small>
       </div>
-      <div>
+      <div >
       <label>
         Description:
         <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="Description" formControlName="description" />
       </label>
+
         </div>
       <button type="submit" class="bg-blue-600 px-5 py-2 text-white rounded-md shadow-xl transition hover:ease-out hover:scale-110 duration-300">Submit</button>
 

@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {LoginPayload} from "src/app/models/login-payload";
 import {SpotifyapicallsService} from "../../services/spotifyapicalls.service";
+import {TokenserviceService} from "../../services/tokenservice.service";
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit{
               private authService: AuthServiceService,
               private spotifyAPI: SpotifyapicallsService,
               private router: Router,
-              private toastr: ToastrService) {}
+              private toastr: ToastrService,
+              private tokenService: TokenserviceService) {}
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       username:['', Validators.required],
@@ -54,8 +56,11 @@ export class LoginComponent implements OnInit{
         this.toastr.success('Login successful...');
 
         console.log(value);
-
-        localStorage.setItem('token', value.token.toString())//Set user token to local storage
+        //localStorage.setItem('key', JSON.stringify(value))
+        //this.tokenService.set('key', JSON.stringify(value))
+        //console.log(localStorage.getItem('key'));
+        localStorage.setItem('token', value.token.toString())
+        localStorage.setItem('user', value.username.toString())
 
         this.spotifyAPI.spotifyAuth();
 

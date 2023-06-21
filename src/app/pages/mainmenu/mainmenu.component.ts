@@ -38,6 +38,7 @@ export class MainmenuComponent implements OnInit{
           data.tracks.items.forEach((item: any) =>
           {
             //Data taken from spotify call
+
             let albumName = item.album.name;
             let artistName = item.artists[0].name;
             let trackName = item.name;

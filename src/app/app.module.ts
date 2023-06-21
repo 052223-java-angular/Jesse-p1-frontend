@@ -14,6 +14,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import { MainmenuComponent } from './pages/mainmenu/mainmenu.component';
 import { PlaylistComponent } from './pages/playlist/playlist.component';
+import { ForumthreadComponent } from './pages/forumthread/forumthread.component';
+import { SelectplaylistComponent } from './pages/selectplaylist/selectplaylist.component';
 
 
 @NgModule({
@@ -26,6 +28,8 @@ import { PlaylistComponent } from './pages/playlist/playlist.component';
     LoginComponent,
     MainmenuComponent,
     PlaylistComponent,
+    ForumthreadComponent,
+    SelectplaylistComponent,
 
   ],
   imports: [
