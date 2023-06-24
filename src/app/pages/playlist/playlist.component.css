@@ -1,0 +1,14 @@
+.container
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+#one{
+  flex: 1;
+}
+#two
+{
+  flex: 1;
+}
+

@@ -1,0 +1,34 @@
+<app-menunavbar></app-menunavbar>
+<div class="flex flex-col items-center justify-center mt-40 ">
+  <h1 class="text-3xl font-bold mb-8">Search</h1>
+  <div class="w-max-900">
+    <form [formGroup]="searchInput" (ngSubmit)="searchMusic()" class="flex items-center mt-2">
+      <input class="px-20 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+             formControlName="search" type="text" name="Search" placeholder="Search for music">
+      <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-10 py-2 rounded-r-md">Submit</button>
+    </form>
+  </div>
+    <div class="flex justify-center items-center mt-2 border-8">
+    <table class="border-8">
+      <thead class="border-8">
+      <tr>
+        <th class="border-8 px-5">Artist Name</th>
+        <th class="border-8 px-5">Album Name</th>
+        <th class="border-8 px-5">Song Name</th>
+        <th class="border-8 px-5">Minutes</th>
+        <th class="border-8 px-5">Action</th>
+      </tr>
+      </thead>
+      <tbody class="border-8">
+      <tr *ngFor="let item of trackItems">
+        <td class="border-8 px-5">{{ item.artistName }}</td>
+        <td class="border-8 px-5">{{ item.albumName }}</td>
+        <td class="border-8 px-5">{{ item.trackName }} </td>
+        <td class="border-8 px-5">{{ item.duration/60000 | number:'1.2-2' }} </td>
+        <td class="border-8 px-5"><button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded">Add to my playlist</button> </td>
+      </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+

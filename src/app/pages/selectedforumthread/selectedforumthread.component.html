@@ -1,0 +1,88 @@
+<div>
+  <header>
+    Welcome forum
+    <a class="text-blue-500 underline-offset-4" routerLink="/forumthread">Back</a>
+  </header>
+
+  <div>
+    <li class="border-b py-4 border-8" >
+      <div>
+        <strong class="font-bold">ID: </strong> {{forumthread.id}}
+      </div>
+      <div>
+        <strong class="font-bold">Title: </strong> {{forumthread.title}}
+      </div>
+      <div>
+        <strong class="font-bold">Description: </strong> {{forumthread.description}}
+      </div>
+      <div>
+        <strong class="font-bold">Posted by User: </strong> {{forumthread.username}}
+      </div>
+      <div>
+        <strong class="font-bold">Date: </strong> {{forumthread.creationDate | date:'medium'}}
+      </div>
+
+      <!---option for user to modify their thread ---->
+      <div *ngIf="!showThreadModifyForm">
+        <button *ngIf="showThreadModifyButton" class="px-5 py-2 text-white bg-blue-600 shadow-xl" (click)="displayModifyThread()">
+          Edit thread
+        </button>
+        <button *ngIf="showThreadModifyButton" class="px-5 py-2 text-white bg-blue-600 shadow-xl" (click)="deleteThread(forumthread.id)">
+          Delete thread
+        </button>
+      </div>
+
+      <form *ngIf="showThreadModifyForm" [formGroup]="modifyThreadForm" (ngSubmit)="postModifyThread(forumthread.id)">
+        <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="Title" formControlName="title">
+        <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="Description" formControlName="description">
+        <button class="px-5 py-2 text-white bg-blue-600 shadow-xl" type="submit">Save</button>
+        <button class="px-5 py-2 text-white bg-blue-600 shadow-xl" type="button" (click)="cancelModifyThread()">Cancel</button>
+      </form>
+
+      <div>
+        <strong class="pt-24">Comments:</strong>
+        <ul>
+          <li *ngFor="let forumcomments of forumthread.forumComments" class="border-2">
+            <strong> ID:</strong> {{forumcomments.id}}<br>
+            <strong>Content:</strong>{{forumcomments.content}}<br>
+            <strong>Posted by User:</strong>{{forumcomments.username}}<br>
+            <strong>Date:</strong>{{forumcomments.creationDate| date:'medium'}}<br>
+
+            <!-- --------------buttons for editing and deleting comments--------------------------- -->
+            <button *ngIf="forumcomments.username == loggedInUser " class="px-5 py-2 text-white bg-blue-600 shadow-xl" (click)="displayModifyComment(forumcomments.id)">
+              Edit Comment
+            </button>
+            <button *ngIf="forumcomments.username == loggedInUser" class="px-5 py-2 text-white bg-blue-600 shadow-xl" (click)="deleteComment(forumcomments.id, forumthread.id)">
+              Delete Comment
+            </button>
+            <!----------------------------------forum for editing a comment ----------------------------------->
+            <ng-container *ngIf="showCommentModifyForm">
+            <form *ngIf="selectedCommentId == forumcomments.id" [formGroup]="modifyCommentForum" (ngSubmit)="postModifyComment(forumcomments.id, forumthread.id)">
+              <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="comment" formControlName="content">
+
+              <button class="px-5 py-2 text-white bg-blue-600 shadow-xl" type="submit">Save</button>
+              <button class="px-5 py-2 text-white bg-blue-600 shadow-xl" type="button" (click)="cancelModifyComment()">Cancel</button>
+            </form>
+            </ng-container>
+        </ul>
+
+      </div>
+
+      <div>
+        <button *ngIf="!showCommentForm" class="px-5 py-2 text-white bg-blue-600 shadow-xl" (click)= displayCommentForum()>
+          Post Comment
+        </button>
+        <form *ngIf="showCommentForm" [formGroup]="forumComment" (ngSubmit)="postComment(forumthread.id)">
+<!--          <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="comment" formControlName="content">-->
+           <textarea rows="5" cols="30" pInputTextarea formControlName="content"> </textarea>
+          <button class="px-5 py-2 text-white bg-blue-600 shadow-xl" type="submit">Save</button>
+          <button class="px-5 py-2 text-white bg-blue-600 shadow-xl" type="button" (click)="cancelComment()">Cancel</button>
+
+        </form>
+      </div>
+
+    </li>
+  </div>
+</div>
+
+
