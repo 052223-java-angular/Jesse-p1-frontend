@@ -19,6 +19,9 @@ import { SelectplaylistComponent } from './pages/selectplaylist/selectplaylist.c
 import { SelectedforumthreadComponent } from './pages/selectedforumthread/selectedforumthread.component';
 import {MenunavbarComponent} from "./components/menunavbar/menunavbar.component";
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import {ButtonModule} from "primeng/button";
+import {InputTextModule} from "primeng/inputtext";
+import {RippleModule} from "primeng/ripple";
 
 
 
@@ -51,6 +54,9 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
       preventDuplicates: true,
     }),
     FormsModule,
+    ButtonModule,
+    InputTextModule,
+    RippleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
