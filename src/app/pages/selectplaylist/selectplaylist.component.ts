@@ -1,9 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {PlaylistServiceService} from "../../services/playlist-service.service";
 import {Playlist} from "../../models/playlist";
 import {error} from "@angular/compiler-cli/src/transformers/util";
 import {ToastrService} from "ngx-toastr";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {TokenserviceService} from "../../services/tokenservice.service";
+import {NewPlaylistPayload} from "../../models/NewPlaylistPayload";
 
 @Component({
   selector: 'app-selectplaylist',
@@ -12,12 +15,17 @@ import {ToastrService} from "ngx-toastr";
 })
 export class SelectplaylistComponent implements OnInit{
    playlist!: Playlist;
+   showForm:Boolean=false;
+  playlistForm!: FormGroup;
 
 
 
   constructor(private route:ActivatedRoute,
+              private pl: FormBuilder,
               private playlistService: PlaylistServiceService,
-              private toaster: ToastrService
+              private router: Router,
+              private toaster: ToastrService,
+              private tokenService: TokenserviceService
              ) {
   }
   ngOnInit(): void {
@@ -25,6 +33,10 @@ export class SelectplaylistComponent implements OnInit{
       const id = this.route.snapshot.paramMap.get('id')!;
       console.log(id);
       this.displaySelectedPlaylist(id);
+      this.playlistForm = this.pl.group
+      ({
+        title: ['', Validators.required],
+        description: ['', Validators.required],})
     }
 
   }
@@ -38,7 +50,7 @@ export class SelectplaylistComponent implements OnInit{
         console.log(this.playlist)
       },
       (error) => {
-
+        console.log(error);
       }
     );
   }
@@ -52,8 +64,50 @@ export class SelectplaylistComponent implements OnInit{
         this.toaster.success("Song removed from playlist!")
 
       },
-      error: (err) => {
-        console.log(err);
+      error: (error) => {
+        console.log(error);
+      }
+    });
+  }
+
+  modifyPlaylist() {
+    this.showForm =true;
+    this.playlistForm.controls['title'].markAsTouched();
+    this.playlistForm.controls['description'].markAsTouched();
+
+  }
+
+
+  cancelModify() {
+
+      this.showForm = false;
+
+  }
+
+  saveChanges(playlistId: string) {
+    console.log("tokenService.getKey = " + this.tokenService.get('token'))
+    let activeToken = this.tokenService.get('token');
+
+    //construct a payload for the backend
+    const payload: NewPlaylistPayload = {
+      title: this.playlistForm.controls['title'].value,
+      description: this.playlistForm.controls['description'].value,
+      token: activeToken || ""
+    }
+
+    this.playlistService.modifyPlaylist(playlistId, payload).subscribe({
+      next: value => {
+        this.toaster.success("Playlist successfully updated!")
+
+        this.playlistForm.reset();
+        this.displaySelectedPlaylist(playlistId)
+
+        this.showForm = false;
+        console.log(value);
+      },
+      error: error => {
+        console.log(error.error.message);
+        this.toaster.error(error.error.message)
       }
     });
   }

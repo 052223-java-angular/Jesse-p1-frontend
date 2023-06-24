@@ -61,7 +61,6 @@ export class LoginComponent implements OnInit{
         //console.log(localStorage.getItem('key'));
         localStorage.setItem('token', value.token.toString())
         localStorage.setItem('user', value.username.toString())
-
         this.spotifyAPI.spotifyAuth();
 
         this.router.navigate(['/mainmenu']);

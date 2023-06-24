@@ -7,6 +7,7 @@ import {NewPlaylistPayload} from "../../models/NewPlaylistPayload";
 import {TokenserviceService} from "../../services/tokenservice.service";
 import {Playlist} from "../../models/playlist";
 
+
 @Component({
   selector: 'app-playlist',
   templateUrl: './playlist.component.html',
@@ -53,7 +54,8 @@ export class PlaylistComponent implements OnInit {
     this.playlistService.createPlaylist(payload).subscribe({
       next: value => {
         this.toaster.success("Playlist successfully created!")
-
+        this.playlistForm.reset();
+        this.displayPlaylists()
         console.log(value);
       },
       error: error => {
@@ -87,9 +89,23 @@ export class PlaylistComponent implements OnInit {
     );
   }
 
-  selectPlaylist(id: string) {
+  deletePlaylist(playlistId: string) {
 
-  this.router.navigate(['/select/playlist', id]);
+    this.playlistService.deletePlaylist(playlistId).subscribe({
+      next: () => {
+       this.displayPlaylists()
+        this.toaster.success('Playlist deleted!');
+      },
+      error: (error) => {
+        console.log(error.error.message);
+        this.toaster.error(error.error.message)
+      },
+    });
+  }
+
+  selectPlaylist(playlistId: string) {
+
+    this.router.navigate(['/select/playlist', playlistId]);
 
   }
 }

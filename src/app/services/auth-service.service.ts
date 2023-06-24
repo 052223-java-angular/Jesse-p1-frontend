@@ -4,13 +4,14 @@ import {RegisterPayload} from "../models/register-payload";
 import {Observable} from "rxjs";
 import {Auth} from "../models/auth";
 import {LoginPayload} from "../models/login-payload";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthServiceService
 {
-  baseUrl ='http://localhost:8080/music/api';
+  baseUrl:string = environment.apiBaseUrl;
   constructor( private http: HttpClient) { }
 
   //All HTTP requests are asynchronous, so they will always be working with observable

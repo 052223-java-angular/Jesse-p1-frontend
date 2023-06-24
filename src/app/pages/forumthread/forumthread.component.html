@@ -1,1 +1,32 @@
-<p>forumthread works!</p>
+<app-menunavbar></app-menunavbar>
+<div>
+  <header>
+    Welcome to the forums!
+
+  </header>
+
+  <div>
+    <li *ngFor="let forumthread of forumThreads" class="border-b py-4 cursor-pointer border-8" (click)=selectForumThread(forumthread.id)>
+      <div>
+        <strong class="font-bold">ID: </strong> {{forumthread.id}}
+      </div>
+      <div>
+        <strong class="font-bold">Title: </strong> {{forumthread.title}}
+      </div>
+      <div>
+        <strong class="font-bold">Description: </strong> {{forumthread.description}}
+      </div>
+      <div>
+        <strong class="font-bold">Posted by User: </strong> {{forumthread.username}}
+      </div>
+      <div>
+        <strong class="font-bold">Date: </strong> {{forumthread.creationDate | date:'medium'}}
+      </div>
+      <div>
+        <strong class="font-bold">Comments: </strong> {{ forumthread.forumComments?.length || 0 }}
+
+      </div>
+    </li>
+  </div>
+</div>
+

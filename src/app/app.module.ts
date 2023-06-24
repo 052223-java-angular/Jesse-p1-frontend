@@ -16,6 +16,10 @@ import { MainmenuComponent } from './pages/mainmenu/mainmenu.component';
 import { PlaylistComponent } from './pages/playlist/playlist.component';
 import { ForumthreadComponent } from './pages/forumthread/forumthread.component';
 import { SelectplaylistComponent } from './pages/selectplaylist/selectplaylist.component';
+import { SelectedforumthreadComponent } from './pages/selectedforumthread/selectedforumthread.component';
+import {MenunavbarComponent} from "./components/menunavbar/menunavbar.component";
+import { InputTextareaModule } from 'primeng/inputtextarea';
+
 
 
 @NgModule({
@@ -30,6 +34,8 @@ import { SelectplaylistComponent } from './pages/selectplaylist/selectplaylist.c
     PlaylistComponent,
     ForumthreadComponent,
     SelectplaylistComponent,
+    SelectedforumthreadComponent,
+    MenunavbarComponent,
 
   ],
   imports: [
@@ -37,6 +43,7 @@ import { SelectplaylistComponent } from './pages/selectplaylist/selectplaylist.c
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    InputTextareaModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 4500,

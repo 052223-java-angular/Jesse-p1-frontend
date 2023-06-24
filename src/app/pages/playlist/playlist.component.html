@@ -1,3 +1,4 @@
+<app-menunavbar></app-menunavbar>
 <div class="container">
   <div id="one">
     <header class=" py-4 px-6">
@@ -17,6 +18,10 @@
         <button class="px-5 py-2 text-white bg-blue-600 shadow-xl"
           (click)=selectPlaylist(playlist.id)>
           Select
+        </button>
+        <button class="px-5 py-2 text-white bg-blue-600 shadow-xl"
+                (click)=deletePlaylist(playlist.id)>
+         Delete
         </button>
 <!--        <strong>Songs:</strong>-->
 <!--        <ul>-->
