@@ -8,13 +8,6 @@ export class TokenserviceService {
 
   constructor() { }
 
-  set(key:string, data:any):void{
-    try{
-      localStorage.setItem(key,JSON.stringify(data));
-    }catch (e){
-      console.log('Error saving to localStorage',e)
-    }
-  }
 
   get(key:string ): string | null {
     try {
