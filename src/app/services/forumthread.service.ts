@@ -18,7 +18,9 @@ export class ForumthreadService {
     headers: new HttpHeaders({'auth-token': this.token.get('token')!}),
   };
   constructor(private http: HttpClient, private token:TokenserviceService) { }
-
+  createNewForm(payload:NewForumThreadPayload):Observable<Forumthread> {
+  return this.http.post<Forumthread>(`${this.baseUrl}/forum/create`,payload)
+  }
   displayAllForums():Observable<Forumthread[]> {
    return this.http.get<Forumthread[]>(`${this.baseUrl}/forum/all`)
   }
@@ -50,4 +52,6 @@ export class ForumthreadService {
   {
     return this.http.delete<void>(`${this.baseUrl}/forum/delete/comment/${forumCommentId}`,this.httpHead)
   }
+
+
 }

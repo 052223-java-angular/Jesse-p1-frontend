@@ -60,7 +60,7 @@ export class PlaylistComponent implements OnInit {
       },
       error: error => {
         console.log(error.error.message);
-        this.toaster.error(error.error.message)
+        this.toaster.error(error.message)
       }
 
 
