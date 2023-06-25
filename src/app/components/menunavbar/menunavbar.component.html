@@ -1,11 +1,16 @@
-<nav class="flex justify-center px-0 py-0 ">
-  <ul class="flex gap-5 justify-items-center">
-    <li class="hover: underline text-orange-300 hover:text-orange-600 hover:underline-offset-4 mx-10"><a routerLink="/mainmenu"> Search Music </a></li>
-
-    <li class="hover: underline hover:underline-offset-4 mx-10"><a routerLink="/playlist"> Your Playlists </a></li>
-
-
-    <li class="hover: underline hover:underline-offset-4 mx-10"><a routerLink="/forumthread"> Music Forums </a></li>
+<p-sidebar [(visible)]="sidebarVisible">
+  <ul class="flex flex-col gap-5">
+    <li>
+      <a routerLink="/mainmenu" class="hover:underline hover:underline-offset-4">Search Music</a>
+    </li>
+    <li>
+      <a routerLink="/playlist" class="hover:underline hover:underline-offset-4">Your Playlists</a>
+    </li>
+    <li>
+      <a routerLink="/forumthread" class="hover:underline hover:underline-offset-4">Music Forums</a>
+    </li>
   </ul>
-</nav>
+</p-sidebar>
+
+<p-button  (click)="sidebarVisible = true" icon="pi pi-arrow-right" label="menu"></p-button>
 <!-------TEMP-------->

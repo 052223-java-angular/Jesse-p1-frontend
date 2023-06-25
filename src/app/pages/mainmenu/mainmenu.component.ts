@@ -10,6 +10,7 @@ import {NewArtistPayload} from "../../models/NewArtistPayload";
 import {SongserviceService} from "../../services/songservice.service";
 import {NewTrackPayload} from "../../models/NewTrackPayload";
 import {AddSongToPlaylist} from "../../models/AddSongToPlaylist";
+import {NavbarComponent} from "../../components/navbar/navbar.component";
 
 
 
@@ -31,14 +32,16 @@ export class MainmenuComponent implements OnInit{
               private tokenService:TokenserviceService,
               private playlistService: PlaylistServiceService,
               private toaster: ToastrService,
-              private songService:SongserviceService) {}
+              private songService:SongserviceService,) {}
 
 
   ngOnInit(): void {
+
     this.searchInput = this.fb.group({
       search: ['', Validators.required]
     });
     this.displayPlaylists()
+
   }
 
   /**

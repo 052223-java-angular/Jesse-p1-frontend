@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -25,6 +24,7 @@ import {RippleModule} from "primeng/ripple";
 import {TableModule} from "primeng/table";
 import {DropdownModule} from "primeng/dropdown";
 import {ChartModule} from "primeng/chart";
+import {SidebarModule} from "primeng/sidebar";
 
 
 
@@ -44,26 +44,27 @@ import {ChartModule} from "primeng/chart";
     MenunavbarComponent,
 
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        InputTextareaModule,
-        BrowserAnimationsModule,
-        ToastrModule.forRoot({
-            timeOut: 4500,
-            positionClass: 'toast-bottom-right',
-            preventDuplicates: true,
-        }),
-        FormsModule,
-        ButtonModule,
-        InputTextModule,
-        RippleModule,
-        TableModule,
-        DropdownModule,
-        ChartModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    InputTextareaModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 4500,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
+    FormsModule,
+    ButtonModule,
+    InputTextModule,
+    RippleModule,
+    TableModule,
+    DropdownModule,
+    ChartModule,
+    SidebarModule,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

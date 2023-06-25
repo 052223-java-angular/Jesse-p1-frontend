@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./menunavbar.component.css']
 })
 export class MenunavbarComponent {
+  sidebarVisible: boolean = false;
 
 
 }

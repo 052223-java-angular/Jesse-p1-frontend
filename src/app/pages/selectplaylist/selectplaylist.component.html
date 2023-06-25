@@ -8,13 +8,13 @@
       <ul>
         <li class="border-b py-4">
           <div class="mb-2">
-            <strong class="font-bold">ID:</strong> {{ playlist.id }}
+            <strong class="font-bold">ID:</strong> {{ playlist?.id }}
           </div>
           <div class="mb-2">
-            <strong class="font-bold">Title:</strong> {{ playlist.title }}
+            <strong class="font-bold">Title:</strong> {{ playlist?.title }}
           </div>
           <div class="mb-4">
-            <strong class="font-bold">Description:</strong> {{ playlist.description }}
+            <strong class="font-bold">Description:</strong> {{ playlist?.description }}
 
             <!-- form toggle -->
             <div *ngIf="!showForm">
@@ -33,10 +33,10 @@
                  <strong>Songs:</strong>
                 <ul>
                    <li *ngFor="let song of playlist.songs">
-                     <strong>Artist:</strong>
-                    <strong> ID:</strong> {{song.id}}<br>
-                    <strong>Title:</strong>{{song.title}}<br>
-                   <strong>Duration:</strong>{{song.duration}}<br>
+                     <strong>Artist:</strong>{{song?.name}}
+                    <strong> ID:</strong> {{song?.id}}<br>
+                    <strong>Title:</strong>{{song?.title}}<br>
+                   <strong>Duration:</strong>{{song?.duration}}<br>
                      <button class="px-5 py-2 text-white bg-blue-600 shadow-xl"
                      (click)= deleteSong(song.id)>
                      Remove
@@ -46,10 +46,9 @@
         </li>
       </ul>
     </div>
-    <div>
-<!--      <div class="card flex justify-content-center">-->
-<!--        <p-chart type="doughnut" [data]="data" ></p-chart>-->
-<!--      </div>-->
+    <div class="card flex justify-content-center">
+      <p-chart  type="doughnut" [data]="chartData" [options]="chartOptions"></p-chart>
     </div>
   </div>
-</div>
+  </div>
+

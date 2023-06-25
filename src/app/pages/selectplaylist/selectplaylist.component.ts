@@ -2,12 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {PlaylistServiceService} from "../../services/playlist-service.service";
 import {Playlist} from "../../models/playlist";
-import {error} from "@angular/compiler-cli/src/transformers/util";
+
 import {ToastrService} from "ngx-toastr";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TokenserviceService} from "../../services/tokenservice.service";
 import {NewPlaylistPayload} from "../../models/NewPlaylistPayload";
-import {data} from "autoprefixer";
+
 
 @Component({
   selector: 'app-selectplaylist',
@@ -18,7 +18,8 @@ export class SelectplaylistComponent implements OnInit{
    playlist!: Playlist;
    showForm:Boolean=false;
   playlistForm!: FormGroup;
-
+   chartData: any;
+   chartOptions: any;
 
 
   constructor(private route:ActivatedRoute,
@@ -29,8 +30,8 @@ export class SelectplaylistComponent implements OnInit{
               private tokenService: TokenserviceService
              ) {
   }
-  ngOnInit(): void {
-    {
+  ngOnInit(): void
+  {
       const id = this.route.snapshot.paramMap.get('id')!;
       console.log(id);
       this.displaySelectedPlaylist(id);
@@ -38,8 +39,16 @@ export class SelectplaylistComponent implements OnInit{
       ({
         title: ['', Validators.required],
         description: ['', Validators.required],})
-    }
 
+    this.chartData = this.generateChartData();
+
+    this.chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false
+  };
+
+    console.log("chart data: "+this.chartData);
+    console.log("chart options : " + this.chartOptions)
   }
 
 
@@ -55,6 +64,45 @@ export class SelectplaylistComponent implements OnInit{
       }
     );
   }
+  generateChartData() {
+    const nameCounts: { [key: string]: number } = {};
+    const chartLabels = [];
+    const chartData = [];
+
+    this.playlist.songs.forEach((song) => {
+      if (nameCounts[song.name]) {
+        nameCounts[song.name]++;
+      } else {
+        nameCounts[song.name] = 1;
+      }
+    });
+
+    // Extract the names and counts from the nameCounts object
+    for (const name in nameCounts) {
+      if (nameCounts.hasOwnProperty(name)) {
+        chartLabels.push(name);
+        chartData.push(nameCounts[name]);
+      }
+    }
+
+    const datasets = [
+      {
+        data: chartData,
+        backgroundColor: [
+          // Specify the background colors for each data point
+          // You can customize the colors as per your preference
+          '#FF6384',
+          '#36A2EB',
+          '#FFCE56',
+          // Add more colors if needed
+        ],
+      },
+    ];
+
+    return datasets;
+  }
+
+
 
   deleteSong(songId: string):void
   {
@@ -112,6 +160,4 @@ export class SelectplaylistComponent implements OnInit{
       }
     });
   }
-
-
 }
