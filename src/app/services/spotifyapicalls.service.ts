@@ -62,7 +62,7 @@ export class SpotifyapicallsService {
       q: searchItem,
       type: 'track',
       market: 'ES',
-      limit: 10
+      limit: 50
     };
 
    return  this.http.get<any>(`${this.baseUrl}/v1/search`, {headers, params})

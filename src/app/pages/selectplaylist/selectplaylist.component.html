@@ -33,6 +33,7 @@
                  <strong>Songs:</strong>
                 <ul>
                    <li *ngFor="let song of playlist.songs">
+                     <strong>Artist:</strong>
                     <strong> ID:</strong> {{song.id}}<br>
                     <strong>Title:</strong>{{song.title}}<br>
                    <strong>Duration:</strong>{{song.duration}}<br>
@@ -44,6 +45,11 @@
             </div>
         </li>
       </ul>
+    </div>
+    <div>
+<!--      <div class="card flex justify-content-center">-->
+<!--        <p-chart type="doughnut" [data]="data" ></p-chart>-->
+<!--      </div>-->
     </div>
   </div>
 </div>

@@ -69,7 +69,7 @@ export class PlaylistComponent implements OnInit {
   }
 
 //Method to display currently made playlists
-  displayPlaylists(): void {
+  public displayPlaylists(): void {
     console.log("Using displayPlaylists");
 
     console.log(localStorage.getItem('key'));
@@ -103,7 +103,7 @@ export class PlaylistComponent implements OnInit {
     });
   }
 
-  selectPlaylist(playlistId: string) {
+  public selectPlaylist(playlistId: string) {
 
     this.router.navigate(['/select/playlist', playlistId]);
 

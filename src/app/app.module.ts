@@ -22,6 +22,9 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import {ButtonModule} from "primeng/button";
 import {InputTextModule} from "primeng/inputtext";
 import {RippleModule} from "primeng/ripple";
+import {TableModule} from "primeng/table";
+import {DropdownModule} from "primeng/dropdown";
+import {ChartModule} from "primeng/chart";
 
 
 
@@ -41,23 +44,26 @@ import {RippleModule} from "primeng/ripple";
     MenunavbarComponent,
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    InputTextareaModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot({
-      timeOut: 4500,
-      positionClass: 'toast-bottom-right',
-      preventDuplicates: true,
-    }),
-    FormsModule,
-    ButtonModule,
-    InputTextModule,
-    RippleModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        InputTextareaModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot({
+            timeOut: 4500,
+            positionClass: 'toast-bottom-right',
+            preventDuplicates: true,
+        }),
+        FormsModule,
+        ButtonModule,
+        InputTextModule,
+        RippleModule,
+        TableModule,
+        DropdownModule,
+        ChartModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
