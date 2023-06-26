@@ -5,7 +5,7 @@ name: CI/CD
 on:
   # The workflow will run every time a push is made to the develop branch
   push:
-    branches: [develop]
+    branches: [main]
 
 jobs:
   deploy:
