@@ -1,88 +1,72 @@
-<div>
-  <header>
-    Welcome forum
-    <a class="text-blue-500 underline-offset-4" routerLink="/forumthread">Back</a>
+<div class="container mx-auto">
+  <header class="mb-6 flex justify-between items-center">
+    <h2 class="text-3xl font-bold">Welcome to the Forum</h2>
+    <a class="text-blue-600 underline" routerLink="/forumthread">Back</a>
   </header>
 
-  <div>
-    <li class="border-b py-4 border-8" >
-      <div>
-        <strong class="font-bold">ID: </strong> {{forumthread.id}}
-      </div>
-      <div>
-        <strong class="font-bold">Title: </strong> {{forumthread.title}}
-      </div>
-      <div>
-        <strong class="font-bold">Description: </strong> {{forumthread.description}}
-      </div>
-      <div>
-        <strong class="font-bold">Posted by User: </strong> {{forumthread.username}}
-      </div>
-      <div>
-        <strong class="font-bold">Date: </strong> {{forumthread.creationDate | date:'medium'}}
-      </div>
+  <div class="border-b-2 pb-6">
 
-      <!---option for user to modify their thread ---->
-      <div *ngIf="!showThreadModifyForm">
-        <button *ngIf="showThreadModifyButton" class="px-5 py-2 text-white bg-blue-600 shadow-xl" (click)="displayModifyThread()">
-          Edit thread
-        </button>
-        <button *ngIf="showThreadModifyButton" class="px-5 py-2 text-white bg-blue-600 shadow-xl" (click)="deleteThread(forumthread.id)">
-          Delete thread
-        </button>
-      </div>
+    <div class="mb-4">
+      <strong class="font-bold text-lg">Title:</strong>
+      <span class="ml-2 text-gray-800">{{forumthread.title}}</span>
+    </div>
+    <div class="mb-4">
+      <strong class="font-bold text-lg">Description:</strong>
+      <span class="ml-2 text-gray-800">{{forumthread.description}}</span>
+    </div>
+    <div class="mb-4">
+      <strong class="font-bold text-lg">Posted by User:</strong>
+      <span class="ml-2 text-gray-800">{{forumthread.username}}</span>
+    </div>
+    <div class="mb-4">
+      <strong class="font-bold text-lg">Date:</strong>
+      <span class="ml-2 text-gray-800">{{forumthread.creationDate | date:'medium'}}</span>
+    </div>
 
-      <form *ngIf="showThreadModifyForm" [formGroup]="modifyThreadForm" (ngSubmit)="postModifyThread(forumthread.id)">
-        <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="Title" formControlName="title">
-        <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="Description" formControlName="description">
-        <button class="px-5 py-2 text-white bg-blue-600 shadow-xl" type="submit">Save</button>
-        <button class="px-5 py-2 text-white bg-blue-600 shadow-xl" type="button" (click)="cancelModifyThread()">Cancel</button>
+    <div *ngIf="!showThreadModifyForm">
+      <button *ngIf="showThreadModifyButton" pButton pRipple label="Edit thread" icon="pi pi-pencil" class="p-button p-button-success p-button-rounded mr-2" (click)="displayModifyThread()"></button>
+      <button *ngIf="showThreadModifyButton" pButton pRipple label="Delete thread" icon="pi pi-trash" class="p-button p-button-danger p-button-rounded" (click)="deleteThread(forumthread.id)"></button>
+    </div>
+
+    <form *ngIf="showThreadModifyForm" [formGroup]="modifyThreadForm" (ngSubmit)="postModifyThread(forumthread.id)" class="mt-4">
+      <input class="bg-gray-100 px-4 py-2 rounded shadow focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" placeholder="Title" formControlName="title">
+      <input class="bg-gray-100 px-4 py-2 rounded shadow focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent mt-2" type="text" placeholder="Description" formControlName="description">
+      <button pButton pRipple label="Save" icon="pi pi-check" class="p-button p-button-primary p-button-rounded ml-2" type="submit"></button>
+      <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button p-button-rounded p-button-danger" type="button" (click)="cancelModifyThread()"></button>
+    </form>
+
+    <div>
+      <strong class="pt-8 block text-2xl">Comments:</strong>
+      <ul>
+        <li *ngFor="let forumcomments of forumthread.forumComments" class="border-2 mt-6 p-4">
+
+          <strong class="block">Comment:</strong>
+          <span class="ml-2 text-gray-800">{{forumcomments.content}}</span><br>
+          <strong class="block">Posted by User:</strong>
+          <span class="ml-2 text-gray-800">{{forumcomments.username}}</span><br>
+          <strong class="block">Date:</strong>
+          <span class="ml-2 text-gray-800">{{forumcomments.creationDate | date:'medium'}}</span><br>
+
+          <button *ngIf="forumcomments.username == loggedInUser" pButton pRipple label="Edit Comment" icon="pi pi-pencil" class="p-button p-button-rounded p-button-success mr-2" (click)="displayModifyComment(forumcomments.id)"></button>
+          <button *ngIf="forumcomments.username == loggedInUser" pButton pRipple label="Delete Comment" icon="pi pi-trash" class="p-button p-button-rounded p-button-danger" (click)="deleteComment(forumcomments.id, forumthread.id)"></button>
+
+          <form *ngIf="showCommentModifyForm" [formGroup]="modifyCommentForum" (ngSubmit)="postModifyComment(forumcomments.id, forumthread.id)" class="mt-4">
+            <input class="bg-gray-100 px-4 py-2 rounded shadow focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" placeholder="Comment" formControlName="content">
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button p-button-primary p-button-rounded ml-2" type="submit"></button>
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button p-button-rounded p-button-danger" type="button" (click)="cancelModifyComment()"></button>
+          </form>
+
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <button *ngIf="!showCommentForm" pButton pRipple label="Post Comment" icon="pi pi-plus" class="p-button p-button-primary p-button-rounded mt-6" (click)="displayCommentForum()"></button>
+      <form *ngIf="showCommentForm" [formGroup]="forumComment" (ngSubmit)="postComment(forumthread.id)" class="mt-4">
+        <textarea rows="5" cols="30" class="bg-gray-100 px-4 py-2 rounded shadow focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" formControlName="content"></textarea>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button p-button-primary p-button-rounded ml-2" type="submit"></button>
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button p-button-rounded p-button-danger" type="button" (click)="cancelComment()"></button>
       </form>
-
-      <div>
-        <strong class="pt-24">Comments:</strong>
-        <ul>
-          <li *ngFor="let forumcomments of forumthread.forumComments" class="border-2">
-            <strong> ID:</strong> {{forumcomments.id}}<br>
-            <strong>Content:</strong>{{forumcomments.content}}<br>
-            <strong>Posted by User:</strong>{{forumcomments.username}}<br>
-            <strong>Date:</strong>{{forumcomments.creationDate| date:'medium'}}<br>
-
-            <!-- --------------buttons for editing and deleting comments--------------------------- -->
-            <button *ngIf="forumcomments.username == loggedInUser " class="px-5 py-2 text-white bg-blue-600 shadow-xl" (click)="displayModifyComment(forumcomments.id)">
-              Edit Comment
-            </button>
-            <button *ngIf="forumcomments.username == loggedInUser" class="px-5 py-2 text-white bg-blue-600 shadow-xl" (click)="deleteComment(forumcomments.id, forumthread.id)">
-              Delete Comment
-            </button>
-            <!----------------------------------forum for editing a comment ----------------------------------->
-            <ng-container *ngIf="showCommentModifyForm">
-            <form *ngIf="selectedCommentId == forumcomments.id" [formGroup]="modifyCommentForum" (ngSubmit)="postModifyComment(forumcomments.id, forumthread.id)">
-              <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="comment" formControlName="content">
-
-              <button class="px-5 py-2 text-white bg-blue-600 shadow-xl" type="submit">Save</button>
-              <button class="px-5 py-2 text-white bg-blue-600 shadow-xl" type="button" (click)="cancelModifyComment()">Cancel</button>
-            </form>
-            </ng-container>
-        </ul>
-
-      </div>
-
-      <div>
-        <button *ngIf="!showCommentForm" class="px-5 py-2 text-white bg-blue-600 shadow-xl" (click)= displayCommentForum()>
-          Post Comment
-        </button>
-        <form *ngIf="showCommentForm" [formGroup]="forumComment" (ngSubmit)="postComment(forumthread.id)">
-<!--          <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="comment" formControlName="content">-->
-           <textarea rows="5" cols="30" pInputTextarea formControlName="content"> </textarea>
-          <button class="px-5 py-2 text-white bg-blue-600 shadow-xl" type="submit">Save</button>
-          <button class="px-5 py-2 text-white bg-blue-600 shadow-xl" type="button" (click)="cancelComment()">Cancel</button>
-
-        </form>
-      </div>
-
-    </li>
+    </div>
   </div>
 </div>
-
-

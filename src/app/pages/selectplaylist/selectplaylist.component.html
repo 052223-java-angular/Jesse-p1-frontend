@@ -1,54 +1,47 @@
-<div>
-  <div class="container">
-    <div id="one">
-      <header class=" py-4 px-6">
-        <h1 class="text-2xl font-bold">Selected Playlist</h1>
-        <a class="text-blue-500 underline-offset-4" routerLink="/playlist">Back</a>
-      </header>
-      <ul>
-        <li class="border-b py-4">
-          <div class="mb-2">
-            <strong class="font-bold">ID:</strong> {{ playlist?.id }}
+<div class="container mx-auto">
+  <div class="bg-white shadow-lg rounded-lg p-6 max-w-md mx-auto">
+    <header class="py-4 px-6">
+      <h1 class="text-3xl font-bold text-center mb-4">Selected Playlist</h1>
+      <a class="text-blue-600 underline text-center block" routerLink="/playlist">Back</a>
+    </header>
+    <ul>
+      <li class="border-b-2 pb-4">
+
+        <div class="mb-2">
+          <strong class="font-bold">Title:</strong> {{ playlist?.title }}
+        </div>
+        <div class="mb-4">
+          <strong class="font-bold">Description:</strong> {{ playlist?.description }}
+
+          <!-- Form toggle -->
+          <div *ngIf="!showForm" class="flex justify-center mt-4">
+            <button pButton pRipple label="Modify" icon="pi pi-pencil" class="p-button p-button-success p-button-rounded" (click)="modifyPlaylist()"></button>
           </div>
-          <div class="mb-2">
-            <strong class="font-bold">Title:</strong> {{ playlist?.title }}
-          </div>
-          <div class="mb-4">
-            <strong class="font-bold">Description:</strong> {{ playlist?.description }}
 
-            <!-- form toggle -->
-            <div *ngIf="!showForm">
-              <button class="px-5 py-2 text-white bg-blue-600 shadow-xl" (click)="modifyPlaylist()">Modify</button>
+          <!-- Display form -->
+          <form *ngIf="showForm" [formGroup]="playlistForm" (ngSubmit)="saveChanges(playlist.id)" class="flex flex-col justify-center mt-4">
+            <input class="bg-gray-100 px-5 py-2 rounded-md shadow focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-300 mb-2" type="text" placeholder="Title" formControlName="title">
+            <input class="bg-gray-100 px-5 py-2 rounded-md shadow focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-300 mb-2" type="text" placeholder="Description" formControlName="description">
+            <div class="flex justify-center">
+              <button pButton pRipple label="Save" icon="pi pi-check" class="p-button p-button-primary p-button-rounded px-5 py-2 mr-2" type="submit"></button>
+              <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button p-button-rounded p-button-danger px-5 py-2" type="button" (click)="cancelModify()"></button>
             </div>
+          </form>
 
-            <!-- Display form -->
-            <form *ngIf="showForm" [formGroup]="playlistForm" (ngSubmit)="saveChanges(playlist.id)">
-              <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="Title" formControlName="title">
-              <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="Description" formControlName="description">
-              <button class="px-5 py-2 text-white bg-blue-600 shadow-xl" type="submit">Save</button>
-              <button class="px-5 py-2 text-white bg-blue-600 shadow-xl" type="button" (click)="cancelModify()">Cancel</button>
-            </form>
-
-            <!----Display Songs------->
-                 <strong>Songs:</strong>
-                <ul>
-                   <li *ngFor="let song of playlist.songs">
-                     <strong>Artist:</strong>{{song?.name}}
-                    <strong> ID:</strong> {{song?.id}}<br>
-                    <strong>Title:</strong>{{song?.title}}<br>
-                   <strong>Duration:</strong>{{song?.duration}}<br>
-                     <button class="px-5 py-2 text-white bg-blue-600 shadow-xl"
-                     (click)= deleteSong(song.id)>
-                     Remove
-                     </button>
-               </ul>
-            </div>
-        </li>
-      </ul>
-    </div>
-    <div class="card flex justify-content-center">
-      <p-chart  type="doughnut" [data]="chartData" [options]="chartOptions"></p-chart>
-    </div>
+          <!---- Display Songs ------->
+          <strong class="mt-4">Songs:</strong>
+          <ul>
+            <li *ngFor="let song of playlist.songs" class="flex justify-between items-center mt-2 border border-gray-300 rounded-lg p-3">
+              <div>
+                <strong>Artist:</strong> {{ song?.name }}<br>
+                <strong>Title:</strong> {{ song?.title }}<br>
+                <strong>Duration:</strong> {{ song?.duration }}<br>
+              </div>
+              <button pButton pRipple label="Remove" icon="pi pi-times" class="p-button p-button-danger p-button-rounded px-3 py-1 text-sm" (click)="deleteSong(song.id)"></button>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
   </div>
-  </div>
-
+</div>

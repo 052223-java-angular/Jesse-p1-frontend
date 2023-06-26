@@ -25,6 +25,7 @@ import {TableModule} from "primeng/table";
 import {DropdownModule} from "primeng/dropdown";
 import {ChartModule} from "primeng/chart";
 import {SidebarModule} from "primeng/sidebar";
+import { FooterComponent } from './components/footer/footer.component';
 
 
 
@@ -42,6 +43,7 @@ import {SidebarModule} from "primeng/sidebar";
     SelectplaylistComponent,
     SelectedforumthreadComponent,
     MenunavbarComponent,
+    FooterComponent,
 
   ],
   imports: [

@@ -1,38 +1,35 @@
 <div class="bg-cover bg-center bg-no-repeat" style="background-image: url('https://i.imgur.com/hbgQNsr.jpg')">
-<div class =" flex flex-col items-center">
-  <form [formGroup]="loginForm" (ngSubmit)="submitForm()" class="flex flex-col items-center gap-10 my-40 shadow-xl p-20 rounded-md bg-black bg-opacity-95">
-    <h1 class="font-bold text-4xl text-stone-200"> Login...</h1>
+  <div class="flex flex-col items-center">
+    <form [formGroup]="loginForm" (ngSubmit)="submitForm()" class="flex flex-col items-center gap-10 my-40 shadow-xl p-20 rounded-md bg-black bg-opacity-95">
+      <h1 class="font-bold text-4xl text-stone-200"> Login...</h1>
 
-    <label class="flex flex-col text-stone-200">
-      Username:
-      <input class="bg-stone-200 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300 text-black" type="text" placeholder="Username" formControlName="username" />
-    </label>
+      <label class="flex flex-col text-stone-200">
+        Username:
+        <input class="bg-stone-200 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300 text-black" type="text" placeholder="Username" formControlName="username" />
+      </label>
 
-    <!--Show when username is invalid-->
-    <ng-container *ngIf="loginForm.controls['username']?.errors">
-      <small class="text-red-600" *ngIf="loginForm.controls['username']?.touched">
-        Username needs to be 8-20 characters
-      </small>
-    </ng-container>
+      <!--Show when username is invalid-->
+      <ng-container *ngIf="loginForm.controls['username']?.errors">
+        <small class="text-red-600" *ngIf="loginForm.controls['username']?.touched">
+          Username needs to be 8-20 characters
+        </small>
+      </ng-container>
 
-    <label class="flex flex-col text-stone-200">
-      Password:
-      <input class="bg-stone-200 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300 text-black" type="password" placeholder="Password" formControlName="password"/>
-    </label>
+      <label class="flex flex-col text-stone-200">
+        Password:
+        <input class="bg-stone-200 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300 text-black" type="password" placeholder="Password" formControlName="password"/>
+      </label>
 
-    <!--Show when password is invalid-->
-    <ng-container *ngIf="loginForm.controls['password']?.errors">
-      <small class="text-red-600" *ngIf="loginForm.controls['password']?.touched">
-        Password can not be empty
-      </small>
-    </ng-container>
+      <!--Show when password is invalid-->
+      <ng-container *ngIf="loginForm.controls['password']?.errors">
+        <small class="text-red-600" *ngIf="loginForm.controls['password']?.touched">
+          Password can not be empty
+        </small>
+      </ng-container>
 
+      <button type="submit" class="bg-sky-400 px-8 py-4 text-white rounded-md shadow-xl transition hover:ease-out hover:scale-110 duration-300">Submit</button>
 
-
-    <button type="submit" class="bg-sky-400 px-5 py-2 text-white rounded-md shadow-xl transition hover:ease-out hover:scale-110 duration-300">Submit</button>
-
-    <a class="text-sky-400 shadow-xl underline-offset-4" routerLink="/register">Need to make an account?</a>
-
-  </form>
-</div>
+      <a class="text-sky-400 shadow-xl underline-offset-4" routerLink="/register">Need to make an account?</a>
+    </form>
+  </div>
 </div>

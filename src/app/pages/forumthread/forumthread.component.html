@@ -1,51 +1,51 @@
 <app-menunavbar></app-menunavbar>
 <div>
-  <header>
-    Welcome to the forums!
-
+  <header class="text-4xl font-bold my-8">
+    Welcome to the forums {{localStorage.getItem('user')}}!
   </header>
     <div>
-      <p-button *ngIf="!showForm" label="Make A New Thread"  (click)="displayForm()" ></p-button>
-      <div class="card flex justify-content-center">
-        <form *ngIf="showForm" [formGroup]="forumThreadForm" (ngSubmit)="createNewForm()" >
-          <div class="border-8 place-items-center">
-             <div>
-               <input type="text" pInputText="Title" formControlName="title" />
-             </div>
-             <div>
-               <textarea rows="5" cols="30" formControlName="description"></textarea>
-             </div>
+      <p-button pRipple  icon="pi pi-check" type="submit" class="p-button p-button-rounded " *ngIf="!showForm" label="Make A New Thread"  (click)="displayForm()" ></p-button>
+      <div class="card mt-8">
+        <form *ngIf="showForm" [formGroup]="forumThreadForm" (ngSubmit)="createNewForm()" class="p-8">
+          <div class="grid grid-cols-1 gap-4">
+            <div>
+              <input type="text" pInputText="Title" formControlName="title" class="p-input" placeholder="Thread Title" />
+            </div>
+            <div>
+              <textarea rows="5" cols="30" formControlName="description" class="p-input" placeholder="Thread Description"></textarea>
+            </div>
+            <div class="flex justify-end">
             <span class="p-buttonset">
-              <button pButton pRipple label="Post" icon="pi pi-check" type="submit"></button>
-              <button pButton pRipple label="Cancel" icon="pi pi-times" (click)="cancelCreation()"></button>
+              <button pButton pRipple label="Post" icon="pi pi-check" type="submit" class="p-button p-button-rounded p-button-success"></button>
+              <button pButton pRipple label="Cancel" icon="pi pi-times" (click)="cancelCreation()" class="p-button p-button-rounded p-button-danger"></button>
             </span>
+            </div>
           </div>
         </form>
       </div>
     </div>
 
-  <div>
-    <li *ngFor="let forumthread of forumThreads" class="border-b py-4 cursor-pointer border-8" (click)=selectForumThread(forumthread.id)>
-      <div>
-        <strong class="font-bold">ID: </strong> {{forumthread.id}}
-      </div>
-        <div>
-         <strong class="font-bold">Title: </strong> {{forumthread.title}}
+  <div class="flex flex-col items-center">
+    <ul class="w-full max-w-lg">
+      <li *ngFor="let forumthread of forumThreads" class="bg-white rounded-md shadow-md p-6 mb-4 cursor-pointer" (click)="selectForumThread(forumthread.id)">
+        <div class="mb-4">
+          <h3 class="text-xl font-bold">{{ forumthread.title }}</h3>
+          <div class="flex justify-between text-gray-500">
+            <span>Posted by: {{ forumthread.username }}</span>
+            <span>Date: {{ forumthread.creationDate | date:'medium' }}</span>
+          </div>
         </div>
-      <div>
-        <strong class="font-bold">Description: </strong> {{forumthread.description}}
-      </div>
-      <div>
-        <strong class="font-bold">Posted by User: </strong> {{forumthread.username}}
-      </div>
-      <div>
-        <strong class="font-bold">Date: </strong> {{forumthread.creationDate | date:'medium'}}
-      </div>
-      <div>
-        <strong class="font-bold">Comments: </strong> {{ forumthread.forumComments?.length || 0 }}
-
-      </div>
-    </li>
+        <div>
+          <p class="text-gray-700">{{ forumthread.description }}</p>
+        </div>
+        <div class="mt-4 text-gray-500">
+        <span>
+          <i class="far fa-comment"></i> {{ forumthread.forumComments?.length || 0 }} Comments
+        </span>
+        </div>
+      </li>
+    </ul>
   </div>
+
 </div>
 

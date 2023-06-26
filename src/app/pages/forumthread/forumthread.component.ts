@@ -99,4 +99,6 @@ export class ForumthreadComponent implements OnInit{
     this.forumThreadForm.reset()
     this.displayForumThreads()
   }
+
+    protected readonly localStorage = localStorage;
 }

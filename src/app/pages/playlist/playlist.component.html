@@ -1,10 +1,10 @@
 <app-menunavbar></app-menunavbar>
-<div class="container">
+<div class="container mx-auto py-8">
   <div id="one">
-    <header class=" py-4 px-6">
+    <header class="py-4 px-6 bg-gray-200">
       <h1 class="text-2xl font-bold">Your Playlists</h1>
     </header>
-    <ul>
+    <ul class="mt-8">
       <li *ngFor="let playlist of playlists" class="border-b py-4">
         <div class="mb-2">
           <strong class="font-bold">ID:</strong> {{ playlist.id }}
@@ -15,48 +15,29 @@
         <div class="mb-4">
           <strong class="font-bold">Description:</strong> {{ playlist.description }}
         </div>
-        <button class="px-5 py-2 text-white bg-blue-600 shadow-xl"
-          (click)=selectPlaylist(playlist.id)>
-          Select
-        </button>
-        <button class="px-5 py-2 text-white bg-blue-600 shadow-xl"
-                (click)=deletePlaylist(playlist.id)>
-         Delete
-        </button>
-<!--        <strong>Songs:</strong>-->
-<!--        <ul>-->
-<!--          <li *ngFor="let song of playlist.songs">-->
-<!--            <strong> ID:</strong> {{song.id}}<br>-->
-<!--            <strong>Title:</strong>{{song.title}}<br>-->
-<!--            <strong>Duration:</strong>{{song.duration}}<br>-->
-<!--        </ul>-->
+        <div class="flex">
+          <button pButton pRipple label="Update" icon="pi pi-check" class="p-button p-button-rounded p-button-success mr-4" (click)="selectPlaylist(playlist.id)"></button>
+          <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button p-button-rounded p-button-danger" (click)="deletePlaylist(playlist.id)"></button>
+        </div>
       </li>
     </ul>
   </div>
 
-<div id="two">
-  <form [formGroup]="playlistForm" (ngSubmit)="createPlaylist()">
-    <h1 class="text-2xl font-bold">Create Playlist</h1>
-    <div class="create-playlist">
-      <div >
-      <label>
-        Title:
-        <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="Title" formControlName="title" />
-      </label>
-        <small *ngIf="playlistForm.controls['title']?.touched">
-          Can't be blank
-        </small>
-      </div>
-      <div >
-      <label>
-        Description:
-        <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl transition focus:ease-out focus:scale-110 duration-300" type="text" placeholder="Description" formControlName="description" />
-      </label>
-
+  <div id="two" class="mt-8">
+    <form [formGroup]="playlistForm" (ngSubmit)="createPlaylist()">
+      <h1 class="text-2xl font-bold">Create Playlist</h1>
+      <div class="bg-gray-200 p-6 mt-4">
+        <div class="mb-4">
+          <label class="font-bold">Title:</label>
+          <input class="bg-white px-5 py-2 rounded-md shadow-xl w-full" type="text" placeholder="Title" formControlName="title" />
+          <small *ngIf="playlistForm.controls['title']?.touched" class="text-red-500">Can't be blank</small>
         </div>
-      <button type="submit" class="bg-blue-600 px-5 py-2 text-white rounded-md shadow-xl transition hover:ease-out hover:scale-110 duration-300">Submit</button>
-
-    </div>
-  </form>
-</div>
+        <div class="mb-4">
+          <label class="font-bold">Description:</label>
+          <input class="bg-white px-5 py-2 rounded-md shadow-xl w-full" type="text" placeholder="Description" formControlName="description" />
+        </div>
+        <button pButton pRipple type="submit" label="Save" icon="pi pi-check" class="p-button p-button-rounded p-button-primary"></button>
+      </div>
+    </form>
+  </div>
 </div>
