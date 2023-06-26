@@ -19,7 +19,7 @@ const routes: Routes = [
   {path:'forumthread', component: ForumthreadComponent},
   {path:'select/forum/:id', component:SelectedforumthreadComponent},
   {path:'select/playlist/:id', component: SelectplaylistComponent},
-  {path: '**', component:NotFoundComponent}
+  {path: '**', component:NotFoundComponent},
 ];
 
 @NgModule({
