@@ -186,4 +186,6 @@ export class MainmenuComponent implements OnInit{
   cancelAddingToPlaylist() {
     this.showPlaylistDropDown = false;
   }
+
+  protected readonly localStorage = localStorage;
 }
