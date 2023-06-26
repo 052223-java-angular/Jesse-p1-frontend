@@ -1,0 +1,51 @@
+<app-menunavbar></app-menunavbar>
+<div>
+  <header>
+    Welcome to the forums!
+
+  </header>
+    <div>
+      <p-button *ngIf="!showForm" label="Make A New Thread"  (click)="displayForm()" ></p-button>
+      <div class="card flex justify-content-center">
+        <form *ngIf="showForm" [formGroup]="forumThreadForm" (ngSubmit)="createNewForm()" >
+          <div class="border-8 place-items-center">
+             <div>
+               <input type="text" pInputText="Title" formControlName="title" />
+             </div>
+             <div>
+               <textarea rows="5" cols="30" formControlName="description"></textarea>
+             </div>
+            <span class="p-buttonset">
+              <button pButton pRipple label="Post" icon="pi pi-check" type="submit"></button>
+              <button pButton pRipple label="Cancel" icon="pi pi-times" (click)="cancelCreation()"></button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  <div>
+    <li *ngFor="let forumthread of forumThreads" class="border-b py-4 cursor-pointer border-8" (click)=selectForumThread(forumthread.id)>
+      <div>
+        <strong class="font-bold">ID: </strong> {{forumthread.id}}
+      </div>
+        <div>
+         <strong class="font-bold">Title: </strong> {{forumthread.title}}
+        </div>
+      <div>
+        <strong class="font-bold">Description: </strong> {{forumthread.description}}
+      </div>
+      <div>
+        <strong class="font-bold">Posted by User: </strong> {{forumthread.username}}
+      </div>
+      <div>
+        <strong class="font-bold">Date: </strong> {{forumthread.creationDate | date:'medium'}}
+      </div>
+      <div>
+        <strong class="font-bold">Comments: </strong> {{ forumthread.forumComments?.length || 0 }}
+
+      </div>
+    </li>
+  </div>
+</div>
+
